@@ -13,9 +13,9 @@ const { proxy, menuName } = appPackageJson;
 module.exports = {
     mode: 'development',
     devtool: 'eval-source-map',
-    // entry: path.resolve(__dirname, './src/index.js'),
+    entry: path.resolve(__dirname, '../src/index.js'),
     output: {
-        // path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, '../build'),
         filename: '[name].[contenthash].js',
         publicPath: 'http://localhost:3000'
     },
@@ -38,25 +38,13 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(ico|gif|png|jpg|jpeg)$/i,
+                test: /\.(ico|gif|png|jpg|jpeg|svg)$/i,
                 loader: 'url-loader', //'file-loader'
                 options: {
                     limit: 8192, // 8KB'den küçük dosyalar base64 kodu olarak içe aktarılacak
                     name: 'assets/images/[name].[ext]',
                 },
             },
-            // {
-            //     test: /\.(png|jpe?g|gif)$/i,
-            //     use: [
-            //         {
-            //             loader: 'url-loader',
-            //             options: {
-            //                 limit: 8192, // 8KB'den küçük dosyalar base64 kodu olarak içe aktarılacak
-            //                 name: 'assets/images/[name].[ext]',
-            //             },
-            //         },
-            //     ],
-            // },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 loader: 'url-loader',
