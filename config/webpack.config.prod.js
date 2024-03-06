@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -34,16 +34,11 @@ module.exports = {
                 }
             },
             {
-                test: /\.(scss|css)$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader',
-                    'postcss-loader',
-                ]
+                test: /.s?css$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
+                test: /\.(ico|gif|png|jpg|jpeg|svg)$/i,
                 use: [
                     {
                         loader: 'file-loader',
@@ -70,7 +65,7 @@ module.exports = {
     optimization: {
         minimizer: [
             new TerserPlugin(),
-            new OptimizeCssAssetsPlugin()
+            new CssMinimizerPlugin()
         ]
     },
     plugins: [

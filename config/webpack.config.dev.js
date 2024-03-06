@@ -17,7 +17,6 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../build'),
         filename: '[name].[contenthash].js',
-        publicPath: 'http://localhost:3000'
     },
     module: {
         rules: [
@@ -39,7 +38,7 @@ module.exports = {
             },
             {
                 test: /\.(ico|gif|png|jpg|jpeg|svg)$/i,
-                loader: 'url-loader', //'file-loader'
+                loader: 'url-loader',
                 options: {
                     limit: 8192, // 8KB'den küçük dosyalar base64 kodu olarak içe aktarılacak
                     name: 'assets/images/[name].[ext]',
@@ -59,7 +58,6 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env.PUBLIC_URL': JSON.stringify(''),
-            'PUBLIC_URL': JSON.stringify('../public'),
             'process.env.MENU_NAME': JSON.stringify(menuName),
         }),
         new HtmlWebpackPlugin({
@@ -67,7 +65,6 @@ module.exports = {
             filename: 'index.html',
             favicon: './public/favicon.ico',
         }),
-        // new BundleAnalyzerPlugin(),
     ],
     devServer: {
         static: {
