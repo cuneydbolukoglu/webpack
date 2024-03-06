@@ -1,13 +1,16 @@
 {
   "name": "webpack",
   "version": "0.1.0",
+  "author": "Cüneyd",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
+    "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -20,9 +23,9 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.10.0",
+    "css-minimizer-webpack-plugin": "^6.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.0",
-    "optimize-css-assets-webpack-plugin": "^6.0.1",
     "postcss-preset-env": "^9.4.0",
     "sass": "^1.71.1",
     "sass-loader": "^14.1.1",
