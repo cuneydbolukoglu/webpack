@@ -74,7 +74,7 @@ module.exports = {
             filename: 'assets/css/styles.[contenthash].css'
         }),
         new webpack.DefinePlugin({
-            'process.env.PUBLIC_URL': JSON.stringify(homepage),
+            'process.env.PUBLIC_URL': JSON.stringify(homepage ? homepage : ''),
             'process.env.MENU_NAME': JSON.stringify(menuName),
         }),
         new HtmlWebpackPlugin({
