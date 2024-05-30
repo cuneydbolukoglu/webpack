@@ -38,7 +38,7 @@
   },
   "proxy": "http://localhost:8080",
   "scripts": {
-    "start": "webpack serve --config config/webpack.config.dev.js",
+    "start": "node scripts/start.js",
     "build": "webpack --config config/webpack.config.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
