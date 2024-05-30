@@ -1,7 +1,7 @@
 const detect = require('detect-port');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const config = require('./config/webpack.config.dev.js');
+const config = require('../config/webpack.config.dev.js');
 
 const DEFAULT_PORT = 3000;
 
