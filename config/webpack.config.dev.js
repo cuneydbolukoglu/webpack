@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const appDirectory = fs.realpathSync(process.cwd());
@@ -19,6 +18,9 @@ module.exports = {
         filename: '[name].[contenthash].js',
         publicPath: '/',
     },
+    resolve: {
+        extensions: ['.js', '.jsx'], // .jsx dosyalarının çözülmesi için
+    },
     module: {
         rules: [
             {
@@ -33,8 +35,8 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
+                    'postcss-loader',
                     'sass-loader',
-                    'postcss-loader'
                 ],
             },
             {
@@ -53,6 +55,18 @@ module.exports = {
                     mimeType: 'application/font-ttf',
                     name: 'assets/fonts/[name].[ext]',
                 },
+            },
+            {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[hash].[ext]',
+                            outputPath: 'media/',
+                        },
+                    },
+                ],
             },
         ]
     },
