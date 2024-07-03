@@ -24,6 +24,9 @@ module.exports = {
         filename: 'assets/js/bundle.[contenthash].js',
         publicPath: '/',
     },
+    resolve: {
+        extensions: ['.js', '.jsx'], // .jsx dosyalarını çözmek için
+    },
     module: {
         rules: [
             {
@@ -34,8 +37,8 @@ module.exports = {
                 }
             },
             {
-                test: /.s?css$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+                test: /\.s?css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /\.(ico|gif|png|jpg|jpeg|svg)$/i,
@@ -55,11 +58,23 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            outputPath: 'fonts'
+                            outputPath: 'assets/fonts', // dosya yolu için düzeltilmiş
+                            name: '[name].[hash:8].[ext]',
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'assets/media/[name].[hash].[ext]', // dosya yolu için düzeltilmiş
+                        },
+                    },
+                ],
+            },
         ]
     },
     optimization: {
