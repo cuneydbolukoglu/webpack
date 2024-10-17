@@ -1,4 +1,4 @@
-# webpack
+# Webpack
 Webpack 5 Setup React
 
 # Getting Started with Create React App
