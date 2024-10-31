@@ -2,9 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); // Ekledik
 
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 const appPackageJson = require('../package.json');
 const appHtml = resolveApp('./public/index.html');
 const { proxy, menuName } = appPackageJson;
@@ -19,7 +20,7 @@ module.exports = {
         publicPath: '/',
     },
     resolve: {
-        extensions: ['.js', '.jsx'], // .jsx dosyalarının çözülmesi için
+        extensions: ['.js', '.jsx'],
     },
     module: {
         rules: [
@@ -28,22 +29,22 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
+                    options: {
+                        plugins: [
+                            require.resolve('react-refresh/babel'), // HMR için React Refresh eklendi
+                        ],
+                    },
                 },
             },
             {
                 test: /\.(scss|css)$/i,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    'sass-loader',
-                ],
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /\.(ico|gif|png|jpg|jpeg|svg)$/i,
                 loader: 'url-loader',
                 options: {
-                    limit: 8192, // 8KB'den küçük dosyalar base64 kodu olarak içe aktarılacak
+                    limit: 8192,
                     name: 'assets/images/[name].[ext]',
                 },
             },
@@ -68,7 +69,7 @@ module.exports = {
                     },
                 ],
             },
-        ]
+        ],
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -80,6 +81,7 @@ module.exports = {
             filename: 'index.html',
             favicon: './public/favicon.ico',
         }),
+        new ReactRefreshWebpackPlugin(), // Eklenen plugin
     ],
     devServer: {
         static: {
@@ -88,12 +90,14 @@ module.exports = {
         port: 3000,
         open: true,
         host: 'localhost',
-        hot: true,
+        hot: true, // Hot Module Replacement
         compress: true,
         historyApiFallback: true,
-        proxy: [{
-            context: ['/api'],
-            target: proxy,
-        }],
+        proxy: [
+            {
+                context: ['/api'],
+                target: proxy,
+            },
+        ],
     },
 };
