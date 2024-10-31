@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-         Webpack 5 with React 
+         Webpack 5 with React
         </p>
       </header>
     </div>
